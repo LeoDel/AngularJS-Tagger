@@ -123,13 +123,8 @@ angular.module('AngularTagger', []).service('angularTaggerService', function ($h
 
     function startLocalStorage() {
         $log.debug("Start LocalStorage", "");
-        if (!store(_lsTagList)) {
+        if(!angular.isObject(store(_lsTagList))) {
             $log.debug("Start LocalStorage", "store(_lsTagList) is empty");
-            store(_lsTagList, {});
-        }
-        var localStorageTagList = JSON.stringify(store(_lsTagList));
-        if (localStorageTagList.charAt(0) != '{') {
-            log("Start LocalStorage", "store(_lsTagList) is not a Json");
             store(_lsTagList, {});
         }
         $rootScope.tagList = store(_lsTagList);
